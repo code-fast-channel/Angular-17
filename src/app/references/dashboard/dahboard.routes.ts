@@ -16,5 +16,9 @@ export const dashBoardRoutes: Routes = [
     {
         path: 'table',
         loadComponent:() => import('./reference-consume/reusable-table/reusable-table.component').then(m=>m.ReusableTableComponent)
+    },
+    {
+        path: 'drag',
+        loadComponent:() => import('./drap-drop/drap-drop.component').then(m=>m.DrapDropComponent)
     }
 ];

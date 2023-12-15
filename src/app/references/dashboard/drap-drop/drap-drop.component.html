@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="box">
+    <ul class="item-list">
+      <li class="item-card" *ngFor="let val of fields">{{val.name}}</li>
+    </ul>
+  </div>
+  <div class="box">Box 2</div>
+  <div class="box">
+    <div class="phone-layout">
+      <div *ngFor="let field of selectedFields" class="form-row" [ngSwitch]="field.type">
+        <ng-container *ngSwitchCase="'text'">
+          <input type="text" placeholder="{{ field.placeholder }}" [(ngModel)]="field.value">
+        </ng-container>
+        <ng-container *ngSwitchCase="'dropdown'">
+          <select [(ngModel)]="field.value">
+            <option *ngFor="let option of field.optionValues" [value]="option.id">{{ option.name }}</option>
+          </select>
+        </ng-container>
+        <ng-container *ngSwitchCase="'text-area'">
+          <textarea placeholder="{{ field.placeholder }}" [(ngModel)]="field.value"></textarea>
+        </ng-container>
+      </div>      
+    <!-- <div class="form-row">
+      <input type="text" placeholder="Name">
+    </div>
+    <div class="form-row">
+      <textarea placeholder="Message"></textarea>
+    </div>
+    <div class="form-row">
+      <select>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+  </div> -->
+    <button>Submit</button>
+  </div>
+</div>
+</div>
+

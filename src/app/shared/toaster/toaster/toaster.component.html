@@ -1,0 +1,7 @@
+<div class="toast-container" *ngIf="showToast" [ngClass]="[toastrType,toastrPosition]">
+    <span class="closeBtn" (click)="closeToast()">x</span>
+    <div class="toast-content">
+      <span class="icon" >{{toasterSymbol[toastrType]}}</span>
+      <span>{{ toastrMsg }}</span>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<p>dashboard-view works!</p>
+dynamic Search implementation 
+<input type="text" [(ngModel)]="searchTitle" (input)="updateFilter()" placeholder="Search title...">
+<input type="text" [(ngModel)]="searchUserId"  (input)="updateFilter()" placeholder="Search user id...">
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">title</th>
+			<th scope="col">User Id</th>
+			<th scope="col">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (country of data | multipleSearch: filters; track country.title; let i = $index) {
+			<tr>
+				<th scope="row">{{ i + 1 }}</th>
+				<td>{{ country.title }}</td>
+				<td>{{ country.userId }}</td>
+				<td>{{ country.completed }}</td>
+			</tr>
+		}
+		@if(loading) {
+         loading....
+		}
+	</tbody>   
+</table>

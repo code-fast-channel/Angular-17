@@ -1,0 +1,70 @@
+<div *ngIf="dynamicFieldShowHide">
+    <div style="display: flex;justify-content: end;">
+        <button class="btn btn-primary" (click)="dynamicFieldDivShow = !dynamicFieldDivShow">Add Fields</button>
+    </div>
+<div style="display: flex;gap: 20px;height: 93px;background: grey;align-items: center;justify-content: end;" *ngIf="dynamicFieldDivShow">
+    <ng-container *ngFor="let vals of HeadArray">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate" [(ngModel)]="vals.checked">
+            <label class="form-check-label" for="flexCheckIndeterminate">
+                {{vals.displayName}}
+            </label>
+        </div>
+    </ng-container>
+</div>
+</div>          
+  <div class="row">
+      <div class="col-md-12">
+          <table class="table table-bordered table-hover">
+              <thead>
+                  <tr>
+                      <ng-container *ngFor="let head of HeadArray">
+                          <th [width]="head?.customStyle?.trow?.width" [height]="head?.customStyle?.trow?.height"
+                              [class]="head?.customStyle?.trow?.class" *ngIf="head.checked">
+                              <ng-container *ngIf="head?.type === 'checkBox' && head?.isEnableSelectall">
+                                  <input type="checkbox"  [(ngModel)]="isSelectAll"
+                                      (change)="checkBoxEvent('selectAll')">
+                              </ng-container>
+                              {{head.displayName}}
+                          </th>
+                      </ng-container>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of GridArray;let sr=index">
+                      <ng-container *ngFor="let head of HeadArray">
+                        <ng-container *ngIf="head.checked">
+                          <ng-container [ngSwitch]="head.type">
+                              <td [width]="head?.customStyle?.tbody?.width" [height]="head?.customStyle?.tbody?.height"
+                              [class]="head?.customStyle?.tbody?.class">
+                                  <ng-container *ngSwitchCase="'snum'">
+                                      {{sr+1}}
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="'template'">
+                                    <ng-container *ngTemplateOutlet="customTemplate[head.id]; context: { $implicit: item, index: sr }"></ng-container>
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="'checkBox'">
+                                      <input type="checkbox"  [(ngModel)]="item.checked"
+                                          (change)="checkBoxEvent()">
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="'date'">
+                                      {{item[head.id]?(item[head.id] | date: head.hasOwnProperty('format') ? head?.format: customDateFormat):''}}
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="'buttonGroup'">
+                                          <ng-container *ngFor="let val of head.buttons; let first = first">
+                                              <button [class]="val?.customStyle?.tbody?.class" [ngStyle]="{ 'margin-left.px': !first ? 10 : 0 }"
+                                                  (click)="buttonChange(val.key,item)">{{val.displayName}}</button>
+                                          </ng-container>
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="'default'">
+                                    {{item[head.id]?item[head.id]:'-'}}
+                                </ng-container>
+                              </td>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>

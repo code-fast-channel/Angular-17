@@ -7,6 +7,45 @@ export const navbarData: INavbarData[] = [
         label: 'Dashboard'
     },
     {
+        routeLink: 'payments',
+        icon: 'fal fa-box-open',
+        label: 'Payments',
+        items: [
+            {
+                routeLink: 'payments/g-pay',
+                label: 'Gpay',
+                items: [
+                    {
+                        routeLink: 'payments/g-pay',
+                        label: 'upid',
+                    },
+                    {
+                        routeLink: 'payments/g-pay/phone-number',
+                        label: 'phone number',
+                    },
+                    {
+                        routeLink: 'payments/g-pay/account-transfer',
+                        label: 'account transfer',
+                    }
+                ]
+            },
+            {
+                routeLink: 'payments/paytm',
+                label: 'paytm',
+                items: [
+                    {
+                        routeLink: 'payments/paytm',
+                        label: 'Wallet',
+                    },
+                    {
+                        routeLink: 'payments/paytm/member-ship',
+                        label: 'member ship',
+                    }
+                ]
+            }
+        ]
+    },
+    {
         routeLink: 'products',
         icon: 'fal fa-box-open',
         label: 'Products',

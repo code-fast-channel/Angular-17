@@ -1,9 +1,9 @@
 // breadcrumb.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export interface BreadcrumbItem {
-  label: string;
+  name: string;
   url: string;
 }
 
@@ -11,17 +11,10 @@ export interface BreadcrumbItem {
   providedIn: 'root'
 })
 export class BreadcrumbService {
-  private breadcrumbsSubject = new BehaviorSubject<BreadcrumbItem[]>([]);
-  breadcrumbs$: Observable<BreadcrumbItem[]> = this.breadcrumbsSubject.asObservable();
+  private breadcrumbSubject = new BehaviorSubject<{ breadcrumb: BreadcrumbItem[], title: string, type: string }>({ breadcrumb: [], title: '', type: ''});
+  breadcrumb$ = this.breadcrumbSubject.asObservable();
 
-  private titleSubject = new BehaviorSubject<string>('');
-  title$: Observable<string> = this.titleSubject.asObservable();
-
-  updateBreadcrumb(breadcrumbs: BreadcrumbItem[]): void {
-    this.breadcrumbsSubject.next(breadcrumbs);
-  }
-
-  updateTitle(title: string): void {
-    this.titleSubject.next(title);
+  updateBreadcrumb(data: { breadcrumb: BreadcrumbItem[], title: string, type: string }): void {
+      this.breadcrumbSubject.next(data);
   }
 }

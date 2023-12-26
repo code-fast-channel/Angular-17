@@ -5,13 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { DashboardViewService } from './dashboard-view.service';
 import { MultipleSearchPipe } from '../../../shared//pipes/multiple-search.pipe';
+import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-dashboard-view',
   standalone: true,
   templateUrl: './dashboard-view.component.html',
   styleUrl: './dashboard-view.component.scss',
-  imports: [CommonModule,FormsModule,MultipleSearchPipe,HttpClientModule],
+  imports: [CommonModule,FormsModule,MultipleSearchPipe,HttpClientModule,BreadcrumbComponent],
   providers: [DashboardViewService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

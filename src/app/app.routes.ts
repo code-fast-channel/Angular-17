@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './references/layouts/layout/layout.component';
-// import { SidenavComponent } from './references//layouts//sidenav/sidenav.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 export const routes: Routes = [
     {
@@ -17,6 +16,11 @@ export const routes: Routes = [
                 path: 'dashboard',
                 canActivate: [AuthGuard],
                 loadChildren:() => import('./references/dashboard/dahboard.routes').then(routes => routes.dashBoardRoutes)
+            },
+            {
+                path: 'payments',
+                canActivate: [AuthGuard],
+                loadChildren:() => import('./references/payments/payment.routes').then(routes => routes.paymentRoutes)
             },
         ]
     },

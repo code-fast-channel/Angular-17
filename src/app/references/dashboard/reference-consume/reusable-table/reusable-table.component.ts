@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonTableComponent } from '../../../../shared/component/common-table/common-table.component';
 import { Custom, OverAllTable, TableWithCheckBox, TableWithCheckBoxAll, TableWithoutCheckbox } from './reusable-table.constant';
-
+import { BreadcrumbService } from '../../../../shared/breadcrumb/breadcrumb.service';
+import {BreadcrumbComponent} from '../../../../shared/breadcrumb/breadcrumb.component';
 @Component({
   selector: 'app-reusable-table',
   standalone: true,
-  imports: [CommonTableComponent],
+  imports: [CommonTableComponent,BreadcrumbComponent],
   templateUrl: './reusable-table.component.html',
   styleUrl: './reusable-table.component.scss'
 })
@@ -51,10 +52,12 @@ export class ReusableTableComponent implements OnInit {
     }
   ]
 
-  constructor(
-    // private modalService: NgbModal,public activeModal: NgbActiveModal
-    ) {
-    
+  constructor(private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.updateBreadcrumb({
+      breadcrumb: [{ name: 'Table', url: '/' }, { name: 'Dynamic bredcrumb', url: '/' }],
+      title: 'Example Page',
+      type: 'update'
+    });
   }
 
   ngOnInit(): void {
@@ -93,5 +96,12 @@ export class ReusableTableComponent implements OnInit {
 
   customClick(data: any,index: any) {
     console.log('data',data,index)
+  }
+  ngOnDestroy() {
+    this.breadcrumbService.updateBreadcrumb({
+      breadcrumb: [],
+      title: '',
+      type: 'reset'
+    });
   }
 }

@@ -1,12 +1,11 @@
-{{breadcrumbs|json}}
-<nav>
-    <ng-container *ngFor="let breadcrumb of breadcrumbs; let last = last">
-      <ng-container *ngIf="!last">
-        <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a> &gt;
-      </ng-container>
-      <ng-container *ngIf="last">
-        {{ breadcrumb.label }}
-      </ng-container>
-    </ng-container>
-  </nav>
-  
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item cursor-pointer" [ngClass]="{'active': last,'disable-block': last}" [routerLink]="page.url" *ngFor="let page of pageInfo; let i = index; let last = last"><a>{{page.name}}</a></li>
+  </ol>
+</nav> -->
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item cursor-pointer" [ngClass]="{'active': last,'disable-block': last}" [routerLink]="page.url" *ngFor="let page of pageInfo; let i = index; let last = last"><a>{{page.name}}</a></li>
+  </ol>
+</nav>

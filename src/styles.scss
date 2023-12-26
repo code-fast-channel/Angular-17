@@ -36,3 +36,13 @@ body {
         padding: 1rem 1.5rem; 
     }
 }
+
+.disable-block {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+}
+
+.cursor-pointer {
+    cursor:pointer;
+}

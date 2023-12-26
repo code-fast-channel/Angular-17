@@ -1,53 +1,128 @@
+// import { Component, OnInit } from '@angular/core';
+// import { BreadcrumbService, BreadcrumbItem } from './breadcrumb.service';
+// import { RouterModule, Routes } from '@angular/router';
+// import { CommonModule } from '@angular/common';
+// import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+// import { filter, map, mergeMap } from 'rxjs/operators';
+// import { Title } from '@angular/platform-browser';
+
+// @Component({
+//   selector: 'app-breadcrumb',
+//   standalone: true,
+//   imports: [CommonModule,RouterModule],
+//   templateUrl: './breadcrumb.component.html',
+//   styleUrl: './breadcrumb.component.scss',
+// })
+// export class BreadcrumbComponent implements OnInit {
+//   public pageInfo: any;
+
+//   constructor(
+//     private router: Router,
+//     private activatedRoute: ActivatedRoute,
+//     private title: Title
+//   ) {}
+
+//   ngOnInit() {
+//     this.updateBreadcrumb(this.activatedRoute);
+//     this.router.events
+//       .pipe(filter((event:any) => event instanceof NavigationEnd))
+//       .subscribe(() => {
+//         this.updateBreadcrumb(this.activatedRoute);
+//       });
+//   }
+
+//   private updateBreadcrumb(route: ActivatedRoute): void {
+//     const lastRoute = this.getLastChild(route);
+
+//     if (lastRoute) {
+//       const data = lastRoute.snapshot.data;
+//       if (data) {
+//         this.title.setTitle(data.title);
+//         this.pageInfo = data.breadcrumb;
+//       }
+//     }
+//   }
+
+//   private getLastChild(route: ActivatedRoute): any {
+//     let lastChild = route;
+//     while (lastChild.firstChild) {
+//       lastChild = lastChild.firstChild;
+//     }
+//     return lastChild;
+//   }
+// }
+
 import { Component, OnInit } from '@angular/core';
 import { BreadcrumbService, BreadcrumbItem } from './breadcrumb.service';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, map, mergeMap } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.scss',
 })
 export class BreadcrumbComponent implements OnInit {
-  breadcrumbs: Array<{ label: string, url: string }> = [];
+  public pageInfo: any;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private title: Title,
+    private breadcrumbService: BreadcrumbService
+  ) {}
 
-  ngOnInit(): void {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root);
+  ngOnInit() {
+    // Initial breadcrumb setup
+    this.updateBreadcrumb(this.activatedRoute);
+
+    // Subscribe to router events for dynamic updates
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.updateBreadcrumb(this.activatedRoute);
+      });
+
+    // Subscribe to breadcrumb changes from the service
+    this.breadcrumbService.breadcrumb$.subscribe((breadcrumbInfo) => {
+      if (breadcrumbInfo?.type == 'update') {
+        this.updateBreadcrumbInfo(breadcrumbInfo);
+      } else if(breadcrumbInfo?.type === 'reset') {
+        this.title.setTitle('');
+        this.pageInfo = [];
+        this.breadcrumbService.updateBreadcrumb(null as any)
+      }
     });
   }
 
-  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Array<{ label: string, url: string }> = []): Array<{ label: string, url: string }> {
-    const children: ActivatedRoute[] = route.children;
+  private updateBreadcrumb(route: ActivatedRoute): void {
+    const lastRoute = this.getLastChild(route);
 
-    if (children.length === 0) {
-      return breadcrumbs;
-    }
-
-    for (const child of children) {
-      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
-
-      if (routeURL !== '') {
-        url += `/${routeURL}`;
+    if (lastRoute) {
+      const data = lastRoute.snapshot.data;
+      console.log('data breadcrumb',data)
+      if (data) {
+        this.title.setTitle(data.title);
+        this.pageInfo = data.breadcrumb;
       }
-
-      breadcrumbs.push({ label: this.getLabel(child), url: url });
-      return this.createBreadcrumbs(child, url, breadcrumbs);
     }
-
-    return breadcrumbs;
   }
 
-  private getLabel(route: ActivatedRoute): string {
-    const breadcrumbData = route.snapshot.data['breadcrumb'];
-    return breadcrumbData ? breadcrumbData[0].label : '';
+  private getLastChild(route: ActivatedRoute): any {
+    let lastChild = route;
+    while (lastChild.firstChild) {
+      lastChild = lastChild.firstChild;
+    }
+    return lastChild;
+  }
+
+  private updateBreadcrumbInfo(breadcrumbInfo: any): void {
+    this.title.setTitle(breadcrumbInfo.title);
+    this.pageInfo = breadcrumbInfo.breadcrumb;
   }
 }

@@ -1,0 +1,170 @@
+
+
+
+<h2>Numbers</h2>
+<!-- <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of items">
+        <td>{{ user.id }}</td>
+        <td>{{ user.title }}</td>
+        <td>{{ user.body }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+  
+<app-mat-pagination
+[type]="'numbers'"
+[currentPage]="currentPage"
+[pageSize]="pageSize"
+[totalItems]="totalItems"
+(pageChange)="onPageChange($event)"
+></app-mat-pagination>
+
+
+<h2>Full Numbers</h2>
+
+<!-- <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of items">
+      <td>{{ user.id }}</td>
+      <td>{{ user.title }}</td>
+      <td>{{ user.body }}</td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+<app-mat-pagination
+[type]="'fullnumbers'"
+[currentPage]="currentPage"
+[pageSize]="pageSize"
+[totalItems]="totalItems"
+(pageChange)="onPageChange($event)"
+></app-mat-pagination>
+<h2>singlenumber</h2>
+
+<!-- <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of items">
+      <td>{{ user.id }}</td>
+      <td>{{ user.title }}</td>
+      <td>{{ user.body }}</td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+<app-mat-pagination
+[type]="'singlenumber'"
+[currentPage]="currentPage"
+[pageSize]="pageSize"
+[totalItems]="totalItems"
+(pageChange)="onPageChange($event)"
+></app-mat-pagination>
+<h2>single number With Prev Next</h2>
+
+<!-- <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of items">
+      <td>{{ user.id }}</td>
+      <td>{{ user.title }}</td>
+      <td>{{ user.body }}</td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+<app-mat-pagination
+[type]="'singlenumberWithPrevNext'"
+[currentPage]="currentPage"
+[pageSize]="pageSize"
+[totalItems]="totalItems"
+(pageChange)="onPageChange($event)"
+></app-mat-pagination>
+
+
+<h2>numbersWithButton</h2>
+
+<!-- <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of items">
+      <td>{{ user.id }}</td>
+      <td>{{ user.title }}</td>
+      <td>{{ user.body }}</td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+<app-mat-pagination
+[type]="'numbersWithButton'"
+[currentPage]="currentPage"
+[pageSize]="pageSize"
+[totalItems]="totalItems"
+(pageChange)="onPageChange($event)"
+></app-mat-pagination>
+
+
+
+
+
+<h2>Default</h2>
+<!-- <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of items">
+        <td>{{ user.id }}</td>
+        <td>{{ user.title }}</td>
+        <td>{{ user.body }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+  
+
+<app-mat-pagination
+[currentPage]="currentPage"
+[pageSize]="pageSize"
+[totalItems]="totalItems"
+(pageChange)="onPageChange($event)"
+></app-mat-pagination>

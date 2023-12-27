@@ -4,6 +4,7 @@ import {
     ActivatedRouteSnapshot,
     RouterStateSnapshot
 } from '@angular/router';
+import { permissionsConfig, permissions } from '../guards/auth.permissions.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthGuard implements CanActivate {
     }
 
     checkLogin(url: string, rolePermission: string = ''): Promise<boolean> | boolean {
-      console.log('urrrll', url)
+      console.log('urrrll', url,rolePermission)
         const loginToken = localStorage.getItem('loginToken') ?? false;
         if (loginToken) {
           console.log('conditiontrue');
@@ -28,6 +29,11 @@ export class AuthGuard implements CanActivate {
               this.router.navigate(['/dashboard']);
               return false;
             }
+
+            if(rolePermission && !permissions[rolePermission]) {
+              return false;
+             }
+
             return true;
         }  else {
           if (url === '/auth/login') {

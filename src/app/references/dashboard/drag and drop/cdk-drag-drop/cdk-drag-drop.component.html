@@ -1,0 +1,21 @@
+
+
+<div class="d-flex gap-5">
+  <div>
+    <div>
+Array
+    </div>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
+    </div>
+  </div>
+  
+  <div>
+    <div>
+      Array of Object
+    </div>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="dropArrOfObj($event)">
+      <div class="example-box" *ngFor="let movie of arrOfObj" cdkDrag>{{movie.name}}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+
+  <app-button [text]="'get cache'" [btnClass]="'btn-sm btn-primary'" (onBtnClick)="refreshData(false)"></app-button>
+  <app-button [text]="'Refresh Data'" [btnClass]="'btn-sm btn-success'" (onBtnClick)="refreshData(true)"></app-button>
+
+  <div *ngIf="data">
+    {{ data | json }}
+  </div>

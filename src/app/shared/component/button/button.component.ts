@@ -12,6 +12,7 @@ export class ButtonComponent {
 
   @Input() btnClass: string = '';
   @Input() text: string = '';
+  @Input() customstyle: any='';
 
   @Output() onBtnClick = new EventEmitter<any>();
 

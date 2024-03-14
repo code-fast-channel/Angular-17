@@ -1,1 +1,66 @@
-<p>common-form works!</p>
+<div class="container mt-5">
+  <div [class]="classes?.parentClass">
+    <div [class]="classes?.childClass">
+      <label [for]="inputId">{{label}}-{{type}}</label>
+      <!-- Text -->
+      <ng-container *ngIf="type==='text'">
+          <input [ngClass]="{'error1': submitted && control?.errors}" class="form-control" [formControl]="control"
+              type="text" [id]="inputId" />
+      </ng-container>
+      <!-- number -->
+      <ng-container *ngIf="type==='number'">
+          <input [ngClass]="{'error1': submitted && control?.errors}" class="form-control" [formControl]="control"
+              type="number" [id]="inputId" />
+      </ng-container>
+      <!-- radio -->
+      <ng-container *ngIf="type=='radio'">
+          <ng-container *ngFor="let val of customData.data">
+              <label>{{val[customData.key]}}</label>
+          <input [value]="val[customData.value]" [formControl]="control"
+              type="radio" [id]="inputId" />
+          </ng-container>
+          
+      </ng-container>
+      <!-- select -->
+      <ng-container *ngIf="type==='select'">
+          <select name="dropdown" [id]="inputId" [ngClass]="{'error1': submitted && control?.errors}" class="form-control"
+              [formControl]="control" type="text" [id]="inputId">
+              <option [value]="val[customData.value]" *ngFor="let val of customData.data">{{val[customData.key]}}</option>
+          </select>
+      </ng-container>
+      <!-- checkbox -->
+      <ng-container *ngIf="type=='checkbox'">
+          <input type="checkbox" [ngClass]="{'error1': submitted && control?.errors}"
+              [formControl]="control" type="checkbox" [id]="inputId" />
+      </ng-container>
+      <!--Multiple checkbox with and without selectAll-->
+      <ng-container *ngIf="type==='multiplecheckbox'">
+          <ng-container *ngIf="customData.enableSelectAll">
+              <input type="checkbox" [(ngModel)]="customData.isSelectAll" [id]="inputId" (change)="checkboxChange('selectAll',customData)"/>
+              <label [for]="inputId">select all</label>
+          </ng-container>
+          <div *ngFor="let datas of customData.data">
+              <input type="checkbox" [(ngModel)]="datas.checked"
+                  type="checkbox" id="{{inputId}}{{datas[customData.key]}}" (change)="checkboxChange('singleSelect',customData)" />
+              <label for="{{inputId}}{{datas[customData.key]}}">{{datas[customData.key]}}</label>
+          </div>
+          <div class="error" *ngIf="customData.enableValidation && customData.checkedDatas.length==0">
+            select atleast one
+          </div>
+      </ng-container>
+      <!-- Error Message -->
+      <ng-container *ngIf="submitted && control?.errors">
+          <div *ngFor="let err of control.errors | keyvalue" class="error">
+              <ng-container [ngSwitch]="err.key">
+                  <ng-container *ngSwitchCase="'required'">
+                      {{errorMessage[err.key].replace('{controlName}',this.aliasName)}}
+                  </ng-container>
+              </ng-container>
+          </div>
+      </ng-container>
+    </div>
+  </div>
+
+  
+
+</div>

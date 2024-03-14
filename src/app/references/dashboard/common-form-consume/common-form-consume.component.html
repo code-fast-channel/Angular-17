@@ -1,0 +1,43 @@
+<p>reusable-forms-advanced works!</p>
+<p>reusable-form-for-drag-drop works - newww final!</p>
+
+
+
+<h1>dynamic field loop</h1>
+<div *ngFor="let val of _object.keys(dynamicObjControls);let i=index">
+    <app-common-form [type]="dynamicObjControls[val]?.type" [control]="dynamicObjControls[val]?.control" [submitted]="submitted" [label]="dynamicObjControls[val]?.label" [inputId]="dynamicObjControls[val]?.inputId" [aliasName]="dynamicObjControls[val]?.aliasName" [optionalErrorMessage]="dynamicObjControls[val]?.optionalErrorMessage" [customData]="dynamicObjControls[val]?.customData" (checkboxEmit)="checkedValues($event)"></app-common-form>
+ </div>
+
+ <!-- <h1>dynamic field seperate</h1>
+ <div class="row">
+   <div class="col-6">
+    <app-common-form [type]="dynamicControls[0].type" [control]="dynamicControls[0]?.control" [submitted]="submitted" [label]="dynamicControls[0]?.label" [inputId]="dynamicControls[0]?.inputId" [aliasName]="dynamicControls[0]?.aliasName" [optionalErrorMessage]="dynamicControls[0]?.optionalErrorMessage" [customData]="dynamicControls[0]?.customData" (checkboxEmit)="checkedValues($event)"></app-common-form>
+   </div>
+   <div class="col-6">
+    <app-common-form [type]="dynamicControls[1].type" [control]="dynamicControls[1]?.control" [submitted]="submitted" [label]="dynamicControls[1]?.label" [inputId]="dynamicControls[1]?.inputId" [aliasName]="dynamicControls[1]?.aliasName" [optionalErrorMessage]="dynamicControls[1]?.optionalErrorMessage" [customData]="dynamicControls[1]?.customData" (checkboxEmit)="checkedValues($event)"></app-common-form>
+   </div>
+ </div> -->
+
+
+ <!-- <h1>custom field add</h1>
+ <input [ngClass]="{'error1': submitted && dynamicControls[0]?.control?.errors}" class="form-control" [formControl]="dynamicControls[0]?.control"
+ type="text" [id]="dynamicControls[0].inputId" /> -->
+ <!-- <ng-container *ngIf="submitted && dynamicControls[0]?.control?.errors">
+  <div *ngFor="let err of dynamicControls[0]?.control?.errors | keyvalue" class="error">
+      <ng-container [ngSwitch]="err.key">
+          <ng-container *ngSwitchCase="'required'">
+              Name is required....
+          </ng-container>
+      </ng-container>
+  </div>
+</ng-container> -->
+
+<!-- <app-err-msg [controls]="dynamicControls[0]?.control" [submitted]="submitted" [aliasName]="'names'"></app-err-msg> -->
+
+
+ <button (click)="submit()">Submit</button>
+ <button (click)="reset()">rest</button>
+
+ <p> valid: {{ formObjFormGroup.valid }}</p>
+ <p> invalid: {{ formObjFormGroup.invalid }}</p>
+ <p> value: {{ formObjFormGroup.value|json }}</p>

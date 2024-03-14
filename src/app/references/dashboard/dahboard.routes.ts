@@ -65,6 +65,11 @@ export const dashBoardRoutes: Routes = [
         path: 'drag-drop-twodiv',
         loadComponent:() => import('./drag and drop/drag-and-drop-two-list/drag-and-drop-two-list.component').then(m=>m.DragAndDropTwoListComponent),
         canActivate: [AuthGuard],
+    },
+    {
+        path: 'common-form',
+        loadComponent:() => import('./common-form-consume//common-form-consume.component').then(m=>m.CommonFormConsumeComponent),
+        canActivate: [AuthGuard],
     }
 ];
 

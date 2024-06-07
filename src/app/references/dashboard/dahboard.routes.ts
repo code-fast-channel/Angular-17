@@ -68,7 +68,12 @@ export const dashBoardRoutes: Routes = [
     },
     {
         path: 'common-form',
-        loadComponent:() => import('./common-form-consume//common-form-consume.component').then(m=>m.CommonFormConsumeComponent),
+        loadComponent:() => import('./common-form-consume/common-form-consume.component').then(m=>m.CommonFormConsumeComponent),
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'fork-join',
+        loadComponent:() => import('./Fork-Join/fork-join/fork-join.component').then(m=>m.ForkJoinComponent),
         canActivate: [AuthGuard],
     }
 ];

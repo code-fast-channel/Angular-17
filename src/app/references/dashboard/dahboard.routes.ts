@@ -75,6 +75,11 @@ export const dashBoardRoutes: Routes = [
         path: 'fork-join',
         loadComponent:() => import('./Fork-Join/fork-join/fork-join.component').then(m=>m.ForkJoinComponent),
         canActivate: [AuthGuard],
+    },
+    {
+        path: 'left-right',
+        loadComponent:() => import('./left-to-right/left-to-right.component').then(m=>m.LeftToRightComponent),
+        canActivate: [AuthGuard],
     }
 ];
 

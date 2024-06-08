@@ -1,0 +1,21 @@
+<div style="display: flex;
+justify-content: space-around;">
+<div style="    width: 50%;
+border: 1px solid black;">
+user
+<hr>
+<ul>
+    <ng-container *ngFor="let val of nameList">
+        <li *ngIf="val?.isSelected" (click)="add(val)">{{val.name}}</li>
+    </ng-container>
+</ul>
+</div>
+<div  style="    width: 50%;
+border: 1px solid black;">
+selected user
+<hr>
+<ng-container *ngFor="let val of nameList">
+    <li *ngIf="!val?.isSelected" (click)="remove(val)">{{val.name}}</li>
+</ng-container>
+</div>
+</div>

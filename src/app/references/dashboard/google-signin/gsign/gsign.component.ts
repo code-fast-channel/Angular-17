@@ -11,6 +11,8 @@ declare global {
   styleUrl: './gsign.component.scss'
 })
 export class GsignComponent implements OnInit {
+
+  googleClientId = '388293788994-0rigeqckkmhucdbdtnua1o1ec438uhmk.apps.googleusercontent.com'
   constructor() { }
 
   ngOnInit(): void {
@@ -25,36 +27,36 @@ export class GsignComponent implements OnInit {
     script.defer = true;
     script.onload = () => {
       // Script loaded successfully
-      this.initializeGoogleSignIn();
+      // this.initializeGoogleSignIn();
     };
     document.head.appendChild(script);
   }
 
-  initializeGoogleSignIn(): void {
-    if (window.google && window.google.accounts) {
-      window.google.accounts.id.initialize({
-        client_id: '388293788994-0rigeqckkmhucdbdtnua1o1ec438uhmk.apps.googleusercontent.com', // Replace with your actual client ID
-        callback: this.handleCredentialResponse.bind(this)
-      });
-    } else {
-      console.error('Google API client is not available.');
-    }
-  }
+  // initializeGoogleSignIn(): void {
+  //   if (window.google && window.google.accounts) {
+  //     window.google.accounts.id.initialize({
+  //       client_id: '388293788994-0rigeqckkmhucdbdtnua1o1ec438uhmk.apps.googleusercontent.com', // Replace with your actual client ID
+  //       callback: this.handleCredentialResponse.bind(this)
+  //     });
+  //   } else {
+  //     console.error('Google API client is not available.');
+  //   }
+  // }
 
-  handleGoogleSignIn(): void {
-    if (window.google && window.google.accounts) {
-      window.google.accounts.id.prompt((notification: any) => {
-        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-          console.error('Sign-In prompt not displayed or skipped');
-        }
-      });
-    } else {
-      console.error('Google API client is not available.');
-    }
-  }
+  // handleGoogleSignIn(): void {
+  //   if (window.google && window.google.accounts) {
+  //     window.google.accounts.id.prompt((notification: any) => {
+  //       if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+  //         console.error('Sign-In prompt not displayed or skipped');
+  //       }
+  //     });
+  //   } else {
+  //     console.error('Google API client is not available.');
+  //   }
+  // }
 
-  handleCredentialResponse(response: any): void {
-    console.log('Credential Response', response);
-    // Process the credential response (e.g., send the token to your server)
-  }
+  // handleCredentialResponse(response: any): void {
+  //   console.log('Credential Response', response);
+  //   // Process the credential response (e.g., send the token to your server)
+  // }
 }

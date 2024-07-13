@@ -85,6 +85,11 @@ export const dashBoardRoutes: Routes = [
         path: 'g-sign',
         loadComponent:() => import('./google-signin/gsign/gsign.component').then(m=>m.GsignComponent),
         canActivate: [AuthGuard],
+    },
+    {
+        path: 'g-sign1',
+        loadComponent:() => import('./google-signin/gsign-1/gsign-1.component').then(m=>m.Gsign1Component),
+        canActivate: [AuthGuard],
     }
 ];
 

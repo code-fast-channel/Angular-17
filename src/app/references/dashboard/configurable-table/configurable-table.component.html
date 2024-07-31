@@ -1,0 +1,19 @@
+<!-- app.component.html -->
+<table>
+    <tr *ngFor="let item of items; let i = index">
+      <!-- <td>
+        <ng-container *ngTemplateOutlet="{ edit: editTemplate, delete: deleteTemplate }[item.template]; context: { item: item, index: i }">
+        </ng-container>
+      </td> -->
+    </tr>
+  
+    <!-- define the templates -->
+    <!-- <ng-template #editTemplate let-item="item" let-index="index">
+      <button>Edit {{ item.name }}</button>
+    </ng-template>
+  
+    <ng-template #deleteTemplate let-item="item" let-index="index">
+      <button>Delete {{ item.name }}</button>
+    </ng-template> -->
+  </table>
+  

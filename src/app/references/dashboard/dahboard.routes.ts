@@ -90,6 +90,16 @@ export const dashBoardRoutes: Routes = [
         path: 'g-sign1',
         loadComponent:() => import('./google-signin/gsign-1/gsign-1.component').then(m=>m.Gsign1Component),
         canActivate: [AuthGuard],
+    },
+    {
+        path: 'table-config',
+        loadComponent:() => import('./configurable-table/configurable-table.component').then(m=>m.ConfigurableTableComponent),
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'currency-config',
+        loadComponent:() => import('./currency-configs/currency/currency.component').then(m=>m.CurrencyComponent),
+        canActivate: [AuthGuard],
     }
 ];
 

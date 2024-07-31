@@ -8,6 +8,16 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:directive": {
+          "flat": true,
+          "standalone": true
+        },
+        "@schematics/angular:pipe": {
+          "standalone": true
+        },
+        "@schematics/angular:service": {
+          "flat": true
         }
       },
       "root": "",

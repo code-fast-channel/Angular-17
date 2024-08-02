@@ -8,48 +8,49 @@ export class CurrencyFormatPipe implements PipeTransform {
 
   transform(value: number, currencyCode: string = 'EUR', symbolPosition: string = 'left'): any {
     const currencyFormats: any = {
-      USD: 'en-US',
-      EUR: 'de-DE',
-      JPY: 'ja-JP',
-      GBP: 'en-GB',
-      CAD: 'en-CA',
-      CHF: 'de-CH',
-      AUD: 'en-AU',
-      HKD: 'zh-HK',
-      NZD: 'en-NZ',
-      SGD: 'en-SG',
-      CNY: 'zh-CN',
-      INR: 'en-IN',
-      KRW: 'ko-KR',
-      THB: 'th-TH',
-      MYR: 'ms-MY',
-      IDR: 'id-ID',
-      VND: 'vi-VN',
-      PHP: 'fil-PH',
-      TWD: 'zh-TW',
-      MXN: 'es-MX',
-      BRL: 'pt-BR',
-      ZAR: 'af-ZA',
-      TRY: 'tr-TR',
-      RUB: 'ru-RU',
-      PLN: 'pl-PL',
-      CZK: 'cs-CZ',
-      HUF: 'hu-HU',
-      SEK: 'sv-SE',
-      NOK: 'no-NO',
-      DKK: 'da-DK',
-      ISK: 'is-IS',
-      HRK: 'hr-HR',
-      RON: 'ro-RO',
-      BGN: 'bg-BG',
-      LTL: 'lt-LT',
-      LVL: 'lv-LV',
-      CYP: 'el-CY',
-      ILS: 'he-IL',
-      GEL: 'ka-GE',
-      RSD: 'sr-RS',
-      PKR: 'ur-pk',
-    };
+      USD: 'en-US',  // United States
+      EUR: 'de-DE',  // Germany (Eurozone)
+      JPY: 'ja-JP',  // Japan
+      GBP: 'en-GB',  // United Kingdom
+      CAD: 'en-CA',  // Canada
+      CHF: 'de-CH',  // Switzerland
+      AUD: 'en-AU',  // Australia
+      HKD: 'zh-HK',  // Hong Kong
+      NZD: 'en-NZ',  // New Zealand
+      SGD: 'en-SG',  // Singapore
+      CNY: 'zh-CN',  // China
+      INR: 'en-IN',  // India
+      KRW: 'ko-KR',  // South Korea
+      THB: 'th-TH',  // Thailand
+      MYR: 'ms-MY',  // Malaysia
+      IDR: 'id-ID',  // Indonesia
+      VND: 'vi-VN',  // Vietnam
+      PHP: 'fil-PH',  // Philippines
+      TWD: 'zh-TW',  // Taiwan
+      MXN: 'es-MX',  // Mexico
+      BRL: 'pt-BR',  // Brazil
+      ZAR: 'af-ZA',  // South Africa
+      TRY: 'tr-TR',  // Turkey
+      RUB: 'ru-RU',  // Russia
+      PLN: 'pl-PL',  // Poland
+      CZK: 'cs-CZ',  // Czech Republic
+      HUF: 'hu-HU',  // Hungary
+      SEK: 'sv-SE',  // Sweden
+      NOK: 'no-NO',  // Norway
+      DKK: 'da-DK',  // Denmark
+      ISK: 'is-IS',  // Iceland
+      HRK: 'hr-HR',  // Croatia
+      RON: 'ro-RO',  // Romania
+      BGN: 'bg-BG',  // Bulgaria
+      LTL: 'lt-LT',  // Lithuania
+      LVL: 'lv-LV',  // Latvia
+      CYP: 'el-CY',  // Cyprus
+      ILS: 'he-IL',  // Israel
+      GEL: 'ka-GE',  // Georgia
+      RSD: 'sr-RS',  // Serbia
+      PKR: 'ur-PK',  // Pakistan,
+      LKR: 'ta-LK'   // Sri Lanka
+    };    
 
     const locale: any = currencyFormats[currencyCode] || 'en-US';
     const formatter: any = new Intl.NumberFormat(locale, {
@@ -77,8 +78,10 @@ export class CurrencyFormatPipe implements PipeTransform {
     });
 
     if (symbolPosition === 'right') {
+      console.log('expected:',new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode }).format(value),'actual',numberParts + currencySymbol)
       return numberParts + currencySymbol;
     } else {
+      console.log('expected:',new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode }).format(value),'actual',currencySymbol + numberParts)
       return currencySymbol + numberParts;
     }
   }

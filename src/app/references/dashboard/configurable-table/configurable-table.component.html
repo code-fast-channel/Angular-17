@@ -1,19 +1,30 @@
-<!-- app.component.html -->
 <table>
-    <tr *ngFor="let item of items; let i = index">
-      <!-- <td>
-        <ng-container *ngTemplateOutlet="{ edit: editTemplate, delete: deleteTemplate }[item.template]; context: { item: item, index: i }">
-        </ng-container>
-      </td> -->
+  <thead>
+    <tr>
+      <th *ngFor="let column of tableConfig">{{ column.displayName }}</th>
     </tr>
-  
-    <!-- define the templates -->
-    <!-- <ng-template #editTemplate let-item="item" let-index="index">
-      <button>Edit {{ item.name }}</button>
-    </ng-template>
-  
-    <ng-template #deleteTemplate let-item="item" let-index="index">
-      <button>Delete {{ item.name }}</button>
-    </ng-template> -->
-  </table>
-  
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items; let i = index">
+      <td *ngFor="let column of tableConfig" [ngClass]="column.tdClass">
+        <ng-container *ngIf="!column.isTemplate">
+          {{ item[column.id] }}
+        </ng-container>
+        <ng-container *ngIf="column.isTemplate">
+          <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: item, index: i, template: column.template, columnDetail: column}">
+          </ng-container>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Define templates here -->
+<ng-template #template let-item let-i="index" let-template="template" let-column="columnDetail">
+  <ng-container *ngIf="column.id === 'edit'">
+    <button (click)="onEdit(item)">Edit</button>
+  </ng-container>
+  <ng-container *ngIf="column.id === 'delete'">
+    <button (click)="onDelete(item)">Delete</button>
+  </ng-container>
+</ng-template>

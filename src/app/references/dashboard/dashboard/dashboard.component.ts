@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
-import {PermissionsDirective} from '../../../shared/directives/permissions.directive';
+import { BreadcrumbComponent } from '@shared/breadcrumb/breadcrumb.component';
+import { PermissionsDirective } from '@shared/directives/permissions.directive';
 @Component({
   selector: 'app-dashboard',
   standalone: true,

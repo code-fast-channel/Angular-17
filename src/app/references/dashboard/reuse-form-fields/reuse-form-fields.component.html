@@ -1,0 +1,82 @@
+<code>
+  {{FORM_FIELDS.userDetails.formGroup.value|json}}-->{{FORM_FIELDS.userDetails.formGroup.valid}}
+  <br>
+  {{FORM_FIELDS.studentDetails.formGroup.value|json}}-->{{FORM_FIELDS.studentDetails.formGroup.valid}}
+</code>
+
+
+<!-- <h2>User Details</h2>
+<form [formGroup]="FORM_FIELDS.userDetails.formGroup">
+  <label>Full Name:</label>
+  <input formControlName="fullName" placeholder="Enter your full name">
+  <div *ngIf="FORM_FIELDS.userDetails.formGroup.get('fullName').invalid && (FORM_FIELDS.userDetails.formGroup.get('fullName').dirty || FORM_FIELDS.userDetails.formGroup.get('fullName').touched)">
+    <div *ngIf="FORM_FIELDS.userDetails.formGroup.get('fullName').errors.required">
+      Full Name is required
+    </div>
+  </div>
+
+  <label>Email Address:</label>
+  <input formControlName="email" placeholder="Enter your email address">
+  <div *ngIf="FORM_FIELDS.userDetails.formGroup.get('email').invalid && (FORM_FIELDS.userDetails.formGroup.get('email').dirty || FORM_FIELDS.userDetails.formGroup.get('email').touched)">
+    <div *ngIf="FORM_FIELDS.userDetails.formGroup.get('email').errors.required">
+      Email Address is required
+    </div>
+  </div>
+</form>
+
+<h2>Student Details</h2>
+<form [formGroup]="FORM_FIELDS.studentDetails.formGroup">
+  <label>Roll Number:</label>
+  <input formControlName="rollNumber" placeholder="Enter your roll number">
+  <div *ngIf="FORM_FIELDS.studentDetails.formGroup.get('rollNumber').invalid && (FORM_FIELDS.studentDetails.formGroup.get('rollNumber').dirty || FORM_FIELDS.studentDetails.formGroup.get('rollNumber').touched)">
+    <div *ngIf="FORM_FIELDS.studentDetails.formGroup.get('rollNumber').errors.required">
+      Roll Number is required
+    </div>
+  </div>
+
+  <label>Course:</label>
+  <input formControlName="course" placeholder="Enter your course">
+  <div *ngIf="FORM_FIELDS.studentDetails.formGroup.get('course').invalid && (FORM_FIELDS.studentDetails.formGroup.get('course').dirty || FORM_FIELDS.studentDetails.formGroup.get('course').touched)">
+    <div *ngIf="FORM_FIELDS.studentDetails.formGroup.get('course').errors.required">
+      Course is required
+    </div>
+  </div>
+</form> -->
+
+
+
+
+<!-- Method 2 -->
+<ng-template #formField let-formKey="formKey" let-field="field" let-formGroup="formGroup">
+  <form [formGroup]="formGroup">
+    <label>{{ field.label }}:</label>
+    <input [formControlName]="formKey" [placeholder]="field.placeholder">
+    <ng-container *ngIf="formGroup.get(formKey).errors">
+      <div *ngFor="let err of formGroup.get(formKey).errors | keyvalue" class="error">
+          <ng-container [ngSwitch]="err.key">
+              <ng-container *ngSwitchCase="'required'">
+                  {{errorMessage['required'].replace('{controlName}',field.alias)}}
+                  
+              </ng-container>
+          </ng-container>
+      </div>
+  </ng-container>
+  </form>
+</ng-template>
+
+<h2>User Details</h2>
+<ng-container *ngFor="let field of FORM_FIELDS.userDetails.fields | keyvalue">
+  <ng-container
+    *ngTemplateOutlet="formField; context: { formKey: field.key,field: field.value, formGroup: FORM_FIELDS.userDetails.formGroup }">
+  </ng-container>
+</ng-container>
+
+<h2>Student Details</h2>
+<ng-container *ngFor="let field of FORM_FIELDS.studentDetails.fields | keyvalue">
+  <ng-container
+    *ngTemplateOutlet="formField; context: { formKey: field.key,field: field.value, formGroup: FORM_FIELDS.studentDetails.formGroup }">
+  </ng-container>
+</ng-container>
+
+<app-button [text]="'User Details'" [btnClass]="'btn-sm btn-primary'" (onBtnClick)="formReset('userDetails')"> </app-button>
+<app-button [text]="'Student Details'" [btnClass]="'btn-sm btn-primary'" (onBtnClick)="formReset('studentDetails')"> </app-button>

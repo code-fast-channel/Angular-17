@@ -100,6 +100,11 @@ export const dashBoardRoutes: Routes = [
         path: 'currency-config',
         loadComponent:() => import('./currency-configs/currency/currency.component').then(m=>m.CurrencyComponent),
         canActivate: [AuthGuard],
+    },
+    {
+        path: 'reuse-form-fields',
+        loadComponent:() => import('./reuse-form-fields/reuse-form-fields.component').then(m=>m.ReuseFormFieldsComponent),
+        canActivate: [AuthGuard],
     }
 ];
 
